@@ -39,7 +39,7 @@ class Refiner(scripts.Script):
         self.model = get_obj_from_str(OPENAIUNETWRAPPER)(
             self.model, compile_model=False
         ).eval()
-        self.model.to('cpu', devices.dtype_unet)
+        self.model.to('cuda:0', devices.dtype_unet)
         self.model.train = disabled_train
         self.model.diffusion_model.dtype = devices.dtype_unet
         self.model.conditioning_key = 'crossattn'
